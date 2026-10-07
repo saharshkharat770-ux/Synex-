@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="100%" height="100%">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="leftWing" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0F2A5C"/>
+      <stop offset="50%" stop-color="#1D4ED8"/>
+      <stop offset="100%" stop-color="#00C4FF"/>
+    </linearGradient>
+    <linearGradient id="rightWing" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#D90429"/>
+      <stop offset="40%" stop-color="#F5821F"/>
+      <stop offset="85%" stop-color="#FFB703"/>
+      <stop offset="100%" stop-color="#FFE600"/>
+    </linearGradient>
+    <linearGradient id="bodyGrad" x1="0%" y1="100%" x2="50%" y2="0%">
+      <stop offset="0%" stop-color="#0A1E42"/>
+      <stop offset="70%" stop-color="#1A365D"/>
+      <stop offset="100%" stop-color="#2563EB"/>
+    </linearGradient>
+    <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00A3E0"/>
+      <stop offset="45%" stop-color="#1E8A5F"/>
+      <stop offset="75%" stop-color="#F5821F"/>
+      <stop offset="100%" stop-color="#E63946"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#0F2A5C" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+
+  <!-- Orbital Ring representing Continuous Business Growth Cycle -->
+  <circle cx="200" cy="180" r="145" fill="none" stroke="url(#ringGrad)" stroke-width="4.5" stroke-dasharray="14 8" opacity="0.85"/>
+  <circle cx="200" cy="180" r="145" fill="none" stroke="#0F2A5C" stroke-width="1.5" opacity="0.3"/>
+
+  <!-- Orbital Nodes representing 7 Core Assessment Dimensions -->
+  <circle cx="200" cy="35" r="9" fill="#0F2A5C" stroke="#FFFFFF" stroke-width="2.5"/> <!-- Foundation -->
+  <circle cx="315" cy="85" r="9" fill="#F5821F" stroke="#FFFFFF" stroke-width="2.5"/> <!-- Marketing -->
+  <circle cx="345" cy="195" r="9" fill="#1E8A5F" stroke="#FFFFFF" stroke-width="2.5"/> <!-- Digital -->
+  <circle cx="280" cy="295" r="9" fill="#5B4FBF" stroke="#FFFFFF" stroke-width="2.5"/> <!-- Technology -->
+  <circle cx="120" cy="295" r="9" fill="#C77A1F" stroke="#FFFFFF" stroke-width="2.5"/> <!-- Operations -->
+  <circle cx="55" cy="195" r="9" fill="#C0432F" stroke="#FFFFFF" stroke-width="2.5"/>  <!-- Customer Growth -->
+  <circle cx="85" cy="85" r="9" fill="#0E7C86" stroke="#FFFFFF" stroke-width="2.5"/>  <!-- Strategy -->
+
+  <!-- The SYNEX Phoenix Bird -->
+  <g filter="url(#glow)">
+    <!-- Left Wing Feathers (Blue to Cyan transformation) -->
+    <path d="M198 175 C185 140 150 90 100 68 C118 100 135 125 142 152 C130 130 108 105 82 95 C98 122 115 150 128 178 C112 158 92 138 72 132 C88 158 110 190 135 210 C120 205 105 198 90 192 C115 220 148 240 185 248 Z" fill="url(#leftWing)"/>
+
+    <!-- Right Wing Feathers (Fiery Orange to Golden Success) -->
+    <path d="M202 175 C215 140 250 90 300 68 C282 100 265 125 258 152 C270 130 292 105 318 95 C302 122 285 150 272 178 C288 158 308 138 328 132 C312 158 290 190 265 210 C280 205 295 198 310 192 C285 220 252 240 215 248 Z" fill="url(#rightWing)"/>
+
+    <!-- Phoenix Torso & Crown -->
+    <path d="M200 115 C192 120 188 130 190 142 C194 135 200 130 206 130 C208 122 205 118 200 115 Z" fill="#0A1E42"/>
+    <path d="M200 125 C208 125 218 135 220 148 C215 155 208 158 200 160 C192 158 185 155 180 148 C182 135 192 125 200 125 Z" fill="#1D4ED8"/>
+    <!-- Phoenix Beak & Alert Eye -->
+    <path d="M220 144 L232 147 L220 152 Z" fill="#F5821F"/>
+    <circle cx="212" cy="144" r="2.5" fill="#FFFFFF"/>
+    <circle cx="213" cy="144" r="1.2" fill="#0A1E42"/>
+
+    <!-- Heart of Phoenix / Central Tail Plumage -->
+    <path d="M188 190 C195 215 198 245 200 270 C202 245 205 215 212 190 C206 198 194 198 188 190 Z" fill="url(#bodyGrad)"/>
+    <path d="M194 220 C198 245 199 265 200 282 C201 265 202 245 206 220 Z" fill="#F5821F"/>
+  </g>
+
+  <!-- Typography: SYNEX Brand -->
+  <text x="200" y="348" font-family="'Avenir Next','Segoe UI',Helvetica,Arial,sans-serif" font-weight="900" font-size="44" fill="#0F2A5C" text-anchor="middle" letter-spacing="4">
+    SYNEX
+  </text>
+  <text x="200" y="374" font-family="'Avenir Next','Segoe UI',Helvetica,Arial,sans-serif" font-weight="700" font-size="12" fill="#F5821F" text-anchor="middle" letter-spacing="3.5">
+    GROW. TRANSFORM. SUCCEED.
+  </text>
+</svg>

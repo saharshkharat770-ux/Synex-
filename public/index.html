@@ -1,0 +1,1780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SYNEX — One Partner. Every Step. Endless Growth.</title>
+<style>
+  :root{
+    --navy:#0F2A5C;
+    --navy-deep:#0A1E42;
+    --orange:#F5821F;
+    --orange-deep:#E06A0A;
+    --cream:#FBF9F5;
+    --paper:#FFFFFF;
+    --line:#E4E1D8;
+    --ink:#1B2436;
+    --ink-soft:#5A6478;
+    --green:#1E8A5F;
+    --amber:#C77A1F;
+    --red:#C0432F;
+    --purple:#5B4FBF;
+    --teal:#0E7C86;
+    --radius-sm:6px;
+    --radius-md:12px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Iowan Old Style','Palatino Linotype',Georgia,serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .sans{font-family:'Avenir Next','Segoe UI',Helvetica,Arial,sans-serif;}
+  h1,h2,h3,h4{font-family:'Avenir Next','Segoe UI',Helvetica,Arial,sans-serif; margin:0; letter-spacing:-0.01em;}
+  p{line-height:1.6;}
+  a{text-decoration:none;color:inherit;}
+  button{font-family:inherit;cursor:pointer;}
+  img{display:block;}
+  ::selection{background:var(--orange);color:white;}
+
+  /* Layout shell */
+  #app{min-height:100vh;display:flex;flex-direction:column;}
+  .topbar{
+    position:sticky;top:0;z-index:50;
+    background:rgba(251,249,245,0.96);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .topbar-inner{
+    max-width:1160px;margin:0 auto;padding:12px 28px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .brand{display:flex;align-items:center;gap:12px;cursor:pointer;}
+  .brand img{height:42px;width:42px;border-radius:10px;box-shadow:0 2px 8px rgba(15,42,92,0.12);}
+  .brand-text span:first-child{font-family:'Avenir Next',sans-serif;font-weight:800;font-size:20px;color:var(--navy);letter-spacing:0.02em;line-height:1;}
+  .brand-text span:last-child{display:block;font-size:10px;color:var(--orange-deep);font-weight:700;letter-spacing:0.08em;margin-top:2px;}
+  .nav-links{display:flex;gap:20px;align-items:center;}
+  .nav-links a, .nav-links button.linklike{
+    font-family:'Avenir Next',sans-serif;font-size:14px;color:var(--ink-soft);
+    background:none;border:none;padding:0;font-weight:600;
+  }
+  .nav-links a:hover, .nav-links button.linklike:hover{color:var(--navy);}
+  .btn{
+    font-family:'Avenir Next',sans-serif;font-weight:600;font-size:14px;
+    padding:10px 20px;border-radius:999px;border:none;display:inline-flex;align-items:center;gap:8px;
+    transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+  }
+  .btn:active{transform:scale(0.97);}
+  .btn-primary{background:var(--orange);color:white;box-shadow:0 4px 14px rgba(245,130,31,0.28);}
+  .btn-primary:hover{background:var(--orange-deep);}
+  .btn-ghost{background:transparent;color:var(--navy);border:1.5px solid var(--navy);}
+  .btn-ghost:hover{background:var(--navy);color:white;}
+  .btn-dark{background:var(--navy);color:white;}
+  .btn-dark:hover{background:var(--navy-deep);}
+  .btn-success{background:var(--green);color:white;}
+  .btn-sm{padding:7px 15px;font-size:13px;}
+  .btn:disabled{opacity:0.4;cursor:not-allowed;}
+
+  .backend-badge{
+    display:inline-flex;align-items:center;gap:6px;
+    background:#EBF5F0;color:var(--green);border:1px solid #C4E3D3;
+    font-family:'Avenir Next',sans-serif;font-size:11.5px;font-weight:600;
+    padding:4px 10px;border-radius:999px;
+  }
+  .backend-badge .pulse{
+    width:7px;height:7px;border-radius:50%;background:var(--green);
+    box-shadow:0 0 0 2px rgba(30,138,95,0.3);
+  }
+
+  main{flex:1;}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 28px;}
+
+  /* ---------- HERO ---------- */
+  .hero{padding:80px 0 60px;position:relative;overflow:hidden;}
+  .hero-grid{display:grid;grid-template-columns:1.15fr 0.85fr;gap:56px;align-items:center;}
+  .eyebrow-plain{font-family:'Avenir Next',sans-serif;color:var(--orange-deep);font-weight:700;font-size:13px;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:14px;}
+  .hero h1{font-family:'Iowan Old Style',Georgia,serif;font-weight:400;font-size:50px;line-height:1.12;color:var(--navy-deep);letter-spacing:-0.01em;}
+  .hero h1 em{font-style:italic;color:var(--orange-deep);}
+  .hero p.lede{font-size:17.5px;color:var(--ink-soft);margin-top:20px;max-width:500px;line-height:1.65;}
+  .hero-ctas{display:flex;gap:14px;margin-top:30px;flex-wrap:wrap;}
+  .hero-note{font-family:'Avenir Next',sans-serif;font-size:13px;color:var(--ink-soft);margin-top:14px;}
+
+  .phoenix-card{
+    background:var(--paper);border:1px solid var(--line);border-radius:18px;
+    padding:32px;box-shadow:0 20px 50px rgba(15,42,92,0.08);
+    position:relative;text-align:center;
+  }
+  .phoenix-card .logo-hero{width:160px;height:160px;margin:0 auto 16px;object-fit:contain;}
+  .journey-mini{display:flex;flex-direction:column;gap:0;text-align:left;margin-top:12px;}
+  .journey-mini .step{display:flex;align-items:center;gap:12px;padding:8px 0;}
+  .journey-mini .dot{width:9px;height:9px;border-radius:50%;background:var(--orange);flex-shrink:0;}
+  .journey-mini .step.done .dot{background:var(--green);}
+  .journey-mini .step span{font-family:'Avenir Next',sans-serif;font-size:13px;color:var(--ink-soft);font-weight:500;}
+  .journey-mini .connector{width:1px;height:12px;background:var(--line);margin-left:4px;}
+
+  .section{padding:60px 0;border-top:1px solid var(--line);}
+  .section-head{max-width:640px;margin-bottom:36px;}
+  .section-head h2{font-family:'Iowan Old Style',Georgia,serif;font-weight:400;font-size:32px;color:var(--navy-deep);}
+  .section-head p{color:var(--ink-soft);margin-top:10px;font-size:15.5px;}
+
+  .problem-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+  .problem-item{padding:20px 0;border-top:2px solid var(--navy);}
+  .problem-item h4{font-size:15px;color:var(--navy-deep);margin-bottom:8px;}
+  .problem-item p{font-size:13.5px;color:var(--ink-soft);margin:0;}
+
+  .flow-row{display:flex;align-items:stretch;gap:0;overflow-x:auto;padding-bottom:8px;}
+  .flow-card{
+    background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:22px;
+    min-width:180px;flex:1;
+  }
+  .flow-card .num{font-family:'Avenir Next',sans-serif;font-weight:800;font-size:12.5px;color:var(--orange-deep);margin-bottom:8px;}
+  .flow-card h4{font-size:15px;color:var(--navy-deep);margin-bottom:8px;}
+  .flow-card p{font-size:13px;color:var(--ink-soft);margin:0;}
+  .flow-arrow{display:flex;align-items:center;justify-content:center;width:34px;color:var(--line);font-size:20px;flex-shrink:0;}
+
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;}
+  .mini-score-demo{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:30px;box-shadow:0 12px 30px rgba(15,42,92,0.06);}
+  .cycle-ring{display:flex;justify-content:space-between;align-items:center;margin-top:8px;}
+  .cycle-step{text-align:center;flex:1;}
+  .cycle-step .icon{width:44px;height:44px;border-radius:50%;background:var(--navy);color:white;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-family:'Avenir Next',sans-serif;font-weight:700;font-size:15px;}
+  .cycle-step span{font-family:'Avenir Next',sans-serif;font-size:12px;color:var(--ink-soft);font-weight:500;}
+  .cycle-arrow{color:var(--line);font-size:16px;}
+
+  .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .why-card{padding:26px;border-radius:14px;background:var(--paper);border:1px solid var(--line);}
+  .why-card h4{font-size:16px;color:var(--navy-deep);margin-bottom:10px;}
+  .why-card p{font-size:14px;color:var(--ink-soft);margin:0;}
+
+  .plans-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .plan-card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:30px;display:flex;flex-direction:column;}
+  .plan-card.featured{border:2px solid var(--orange);position:relative;box-shadow:0 16px 40px rgba(245,130,31,0.14);}
+  .plan-badge{position:absolute;top:-13px;left:28px;background:var(--orange);color:white;font-family:'Avenir Next',sans-serif;font-size:12px;font-weight:700;padding:4px 12px;border-radius:999px;}
+  .plan-card h4{font-size:19px;color:var(--navy-deep);}
+  .plan-card .price{font-family:'Avenir Next',sans-serif;font-size:14px;color:var(--ink-soft);margin:10px 0 18px;}
+  .plan-card ul{list-style:none;padding:0;margin:0 0 24px;flex:1;}
+  .plan-card li{font-size:14px;color:var(--ink-soft);padding:7px 0;border-top:1px solid var(--line);}
+  .plan-card li:first-child{border-top:none;}
+
+  .final-cta{
+    background:var(--navy-deep);border-radius:22px;padding:60px;text-align:center;
+    background-image:radial-gradient(circle at 20% 20%, rgba(245,130,31,0.22), transparent 55%);
+  }
+  .final-cta h2{color:white;font-family:'Iowan Old Style',Georgia,serif;font-weight:400;font-size:34px;}
+  .final-cta p{color:rgba(255,255,255,0.7);margin-top:14px;font-size:16px;}
+  .final-cta .hero-ctas{justify-content:center;margin-top:26px;}
+
+  footer{padding:30px 0;border-top:1px solid var(--line);background:var(--paper);}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;font-family:'Avenir Next',sans-serif;font-size:13px;color:var(--ink-soft);}
+
+  /* ---------- AUTH / LOGIN ---------- */
+  .auth-shell{max-width:500px;margin:40px auto 80px;padding:0 24px;}
+  .auth-card{
+    background:var(--paper);border:1px solid var(--line);border-radius:18px;
+    padding:36px;box-shadow:0 16px 40px rgba(15,42,92,0.07);
+  }
+  .auth-tabs{display:flex;gap:4px;background:#EDEAE3;padding:4px;border-radius:10px;margin-bottom:24px;}
+  .auth-tab{
+    flex:1;text-align:center;padding:10px 8px;border-radius:8px;border:none;background:transparent;
+    font-family:'Avenir Next',sans-serif;font-size:13.5px;font-weight:600;color:var(--ink-soft);
+    transition:all .15s ease;cursor:pointer;
+  }
+  .auth-tab.active{background:var(--paper);color:var(--navy);box-shadow:0 2px 6px rgba(0,0,0,0.06);}
+  .auth-field{margin-bottom:16px;}
+  .auth-label{display:block;font-family:'Avenir Next',sans-serif;font-size:13px;font-weight:600;color:var(--ink);margin-bottom:6px;}
+  .auth-input{
+    width:100%;font-family:'Avenir Next',sans-serif;font-size:14.5px;padding:11px 14px;
+    border:1.5px solid var(--line);border-radius:8px;background:var(--cream);color:var(--ink);
+  }
+  .auth-input:focus{outline:none;border-color:var(--orange);background:var(--paper);}
+  .demo-accounts{margin-top:24px;border-top:1px dashed var(--line);padding-top:20px;}
+  .demo-label{font-family:'Avenir Next',sans-serif;font-size:12px;font-weight:700;color:var(--ink-soft);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:10px;}
+  .demo-grid{display:flex;flex-wrap:wrap;gap:8px;}
+  .demo-pill{
+    background:#F0EFE9;border:1px solid #DCD9D0;border-radius:8px;padding:7px 11px;
+    font-family:'Avenir Next',sans-serif;font-size:12px;font-weight:600;color:var(--navy);
+    cursor:pointer;transition:all .15s ease;
+  }
+  .demo-pill:hover{background:var(--navy);color:white;border-color:var(--navy);}
+  .alert-banner{padding:10px 14px;border-radius:8px;font-family:'Avenir Next',sans-serif;font-size:13px;margin-bottom:16px;}
+  .alert-error{background:#FCEBE8;color:var(--red);border:1px solid #F5C6CB;}
+  .alert-success{background:#EBF5F0;color:var(--green);border:1px solid #C4E3D3;}
+
+  /* ---------- ASSESSMENT ---------- */
+  .assess-shell{max-width:700px;margin:0 auto;padding:50px 28px 80px;}
+  .progress-track{height:6px;background:var(--line);border-radius:99px;overflow:hidden;margin-bottom:10px;}
+  .progress-fill{height:100%;background:var(--orange);border-radius:99px;transition:width .35s ease;}
+  .progress-label{font-family:'Avenir Next',sans-serif;font-size:13px;color:var(--ink-soft);display:flex;justify-content:space-between;margin-bottom:34px;}
+  .step-title{font-family:'Avenir Next',sans-serif;font-weight:700;font-size:12px;letter-spacing:0.05em;color:var(--orange-deep);margin-bottom:8px;}
+  .step-h{font-family:'Iowan Old Style',Georgia,serif;font-weight:400;font-size:27px;color:var(--navy-deep);margin-bottom:30px;}
+  .q-block{margin-bottom:28px;}
+  .q-text{font-family:'Avenir Next',sans-serif;font-size:15px;font-weight:600;color:var(--ink);margin-bottom:12px;}
+  .opts{display:flex;flex-direction:column;gap:9px;}
+  .opt{
+    font-family:'Avenir Next',sans-serif;font-size:14.5px;color:var(--ink);
+    border:1.5px solid var(--line);border-radius:10px;padding:12px 16px;background:var(--paper);
+    text-align:left;transition:all .12s ease;display:flex;align-items:center;gap:10px;cursor:pointer;
+  }
+  .opt:hover{border-color:var(--orange);}
+  .opt.selected{border-color:var(--orange);background:#FFF6EC;font-weight:600;}
+  .opt .radio{width:16px;height:16px;border-radius:50%;border:1.5px solid var(--ink-soft);flex-shrink:0;position:relative;}
+  .opt.selected .radio{border-color:var(--orange);}
+  .opt.selected .radio::after{content:'';position:absolute;inset:3px;border-radius:50%;background:var(--orange);}
+  .field-input{
+    width:100%;font-family:'Avenir Next',sans-serif;font-size:15px;padding:12px 14px;
+    border:1.5px solid var(--line);border-radius:10px;background:var(--paper);color:var(--ink);
+  }
+  .field-input:focus{outline:none;border-color:var(--orange);}
+  .step-nav{display:flex;justify-content:space-between;margin-top:40px;}
+
+  /* ---------- APP SHELL & CARDS ---------- */
+  .app-shell{max-width:1160px;margin:0 auto;padding:40px 28px 80px;}
+  .section-title-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;}
+  .section-title-row h2{font-family:'Iowan Old Style',Georgia,serif;font-weight:400;font-size:27px;color:var(--navy-deep);}
+
+  /* Consultant Showcase Banner */
+  .consultant-card{
+    background:linear-gradient(135deg, #0A1E42 0%, #0F2A5C 60%, #173B7A 100%);
+    border-radius:18px;padding:28px 32px;color:white;margin-bottom:32px;
+    box-shadow:0 16px 40px rgba(15,42,92,0.18);position:relative;overflow:hidden;
+  }
+  .consultant-card::after{
+    content:'';position:absolute;right:-50px;top:-50px;width:240px;height:240px;
+    background:radial-gradient(circle, rgba(245,130,31,0.25) 0%, transparent 70%);border-radius:50%;
+  }
+  .consultant-flex{display:flex;gap:28px;align-items:center;position:relative;z-index:2;}
+  .consultant-avatar{
+    width:84px;height:84px;border-radius:50%;border:3px solid var(--orange);
+    background:#1E3A70;display:flex;align-items:center;justify-content:center;
+    font-family:'Avenir Next',sans-serif;font-size:32px;flex-shrink:0;box-shadow:0 6px 16px rgba(0,0,0,0.25);
+  }
+  .consultant-meta h3{font-size:22px;color:white;margin-bottom:4px;}
+  .consultant-meta .role{font-family:'Avenir Next',sans-serif;font-size:13.5px;color:#F5A623;font-weight:700;margin-bottom:6px;}
+  .consultant-meta p{font-size:13px;color:rgba(255,255,255,0.78);margin:0 0 10px;line-height:1.45;}
+  .consultant-badges{display:flex;gap:12px;flex-wrap:wrap;}
+  .c-pill{
+    background:rgba(255,255,255,0.12);padding:5px 12px;border-radius:999px;
+    font-family:'Avenir Next',sans-serif;font-size:12px;color:white;display:inline-flex;align-items:center;gap:6px;
+  }
+  .consultant-actions{margin-left:auto;display:flex;flex-direction:column;gap:10px;flex-shrink:0;position:relative;z-index:2;}
+
+  /* KPI Grid */
+  .kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:32px;}
+  .kpi-card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:22px;}
+  .kpi-card .lbl{font-family:'Avenir Next',sans-serif;font-size:12.5px;color:var(--ink-soft);margin-bottom:6px;font-weight:600;}
+  .kpi-card .val{font-family:'Avenir Next',sans-serif;font-weight:800;font-size:26px;color:var(--navy-deep);line-height:1.1;}
+  .kpi-card .sub{font-family:'Avenir Next',sans-serif;font-size:12px;margin-top:6px;font-weight:500;}
+
+  /* Business Intelligence Analytics Panel */
+  .bi-grid{display:grid;grid-template-columns:1.2fr 0.8fr;gap:24px;margin-bottom:32px;}
+  .panel{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:28px;margin-bottom:24px;}
+  .panel h3{font-size:17px;color:var(--navy-deep);margin-bottom:18px;display:flex;align-items:center;gap:8px;}
+
+  /* Industry Benchmark Comparison Bars */
+  .bench-row{margin-bottom:16px;}
+  .bench-labels{display:flex;justify-content:space-between;font-family:'Avenir Next',sans-serif;font-size:13px;margin-bottom:6px;}
+  .bench-bars{position:relative;height:12px;background:#EDEAE3;border-radius:99px;overflow:hidden;}
+  .bench-bar-client{height:100%;border-radius:99px;position:relative;z-index:2;}
+  .bench-target-line{
+    position:absolute;top:0;bottom:0;width:3px;background:var(--ink);z-index:3;
+    transform:translateX(-50%);
+  }
+  .bench-delta{font-family:'Avenir Next',sans-serif;font-weight:700;font-size:11.5px;}
+
+  /* SWOT Matrix */
+  .swot-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .swot-box{border-radius:10px;padding:16px;}
+  .swot-s{background:#E4F5EC;border-left:4px solid var(--green);}
+  .swot-w{background:#FCEBE8;border-left:4px solid var(--red);}
+  .swot-o{background:#EBF3FA;border-left:4px solid #1E70BF;}
+  .swot-t{background:#FFF3DE;border-left:4px solid var(--amber);}
+  .swot-box h5{font-family:'Avenir Next',sans-serif;font-size:13px;font-weight:700;margin:0 0 6px;}
+  .swot-box ul{margin:0;padding-left:18px;font-size:12.5px;color:var(--ink);line-height:1.45;}
+
+  /* Score dial */
+  .score-hero{display:grid;grid-template-columns:260px 1fr;gap:40px;align-items:center;margin-bottom:44px;}
+  .score-dial{position:relative;width:230px;height:230px;margin:0 auto;}
+  .score-dial svg{transform:rotate(-90deg);}
+  .score-dial .num{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+  .score-dial .num .n{font-family:'Avenir Next',sans-serif;font-weight:800;font-size:48px;color:var(--navy-deep);line-height:1;}
+  .score-dial .num .lbl{font-family:'Avenir Next',sans-serif;font-size:12px;color:var(--ink-soft);margin-top:4px;}
+
+  .health-tag{display:inline-block;font-family:'Avenir Next',sans-serif;font-weight:700;font-size:13px;padding:6px 14px;border-radius:999px;margin-bottom:12px;}
+  .health-strong{background:#E4F5EC;color:var(--green);}
+  .health-good{background:#FFF3DE;color:var(--amber);}
+  .health-weak{background:#FBE7E2;color:var(--red);}
+
+  .cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:36px;}
+  .cat-card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:18px;}
+  .cat-card .top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;}
+  .cat-card h4{font-size:13px;color:var(--ink);font-weight:600;}
+  .cat-card .score{font-family:'Avenir Next',sans-serif;font-weight:800;font-size:18px;color:var(--navy-deep);}
+  .bar-track{height:6px;background:var(--line);border-radius:99px;overflow:hidden;}
+  .bar-fill{height:100%;border-radius:99px;}
+
+  .opp-card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:22px;margin-bottom:16px;}
+  .opp-card .head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;}
+  .opp-card h4{font-size:16px;color:var(--navy-deep);}
+  .opp-tags{display:flex;gap:8px;flex-shrink:0;}
+  .tag{font-family:'Avenir Next',sans-serif;font-size:11.5px;font-weight:700;padding:4px 10px;border-radius:999px;}
+  .tag-impact-high{background:#FBE7E2;color:var(--red);}
+  .tag-impact-medium{background:#FFF3DE;color:var(--amber);}
+  .tag-effort{background:#EDEFF6;color:var(--navy);}
+  .opp-card .problem{font-size:14px;color:var(--ink-soft);margin-bottom:12px;}
+  .opp-card ol{margin:0;padding-left:20px;}
+  .opp-card li{font-size:13.5px;color:var(--ink);padding:3px 0;}
+
+  /* Monthly Growth Cycle */
+  .cycle-track{display:flex;align-items:center;justify-content:space-between;margin:16px 0;}
+  .cycle-track .cs{flex:1;text-align:center;position:relative;}
+  .cycle-track .cs .dot2{
+    width:38px;height:38px;border-radius:50%;background:var(--navy);color:white;
+    display:flex;align-items:center;justify-content:center;font-family:'Avenir Next',sans-serif;
+    font-weight:700;font-size:13px;margin:0 auto 8px;cursor:pointer;
+  }
+  .cycle-track .cs.active .dot2{background:var(--orange);box-shadow:0 0 0 4px rgba(245,130,31,0.25);}
+  .cycle-track .cs span{font-family:'Avenir Next',sans-serif;font-size:11.5px;color:var(--ink-soft);font-weight:600;}
+
+  /* Onboarding Tasks */
+  .task-row{display:flex;align-items:center;gap:12px;padding:11px 0;border-top:1px solid var(--line);}
+  .task-row:first-child{border-top:none;}
+  .checkbox{
+    width:20px;height:20px;border-radius:5px;border:1.5px solid var(--ink-soft);flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;background:var(--paper);cursor:pointer;
+  }
+  .checkbox.checked{background:var(--green);border-color:var(--green);color:white;font-size:12px;}
+  .task-row span{font-family:'Avenir Next',sans-serif;font-size:14px;color:var(--ink);}
+  .task-row.done span{color:var(--ink-soft);text-decoration:line-through;}
+
+  .phase-tabs{display:flex;gap:8px;margin-bottom:20px;}
+  .phase-tab{
+    font-family:'Avenir Next',sans-serif;font-size:13.5px;font-weight:600;color:var(--ink-soft);
+    padding:9px 18px;border-radius:999px;border:1.5px solid var(--line);background:var(--paper);cursor:pointer;
+  }
+  .phase-tab.active{background:var(--navy);color:white;border-color:var(--navy);}
+
+  /* Consultant Table */
+  .admin-table{width:100%;border-collapse:collapse;}
+  .admin-table th{font-family:'Avenir Next',sans-serif;font-size:12px;text-transform:uppercase;letter-spacing:0.04em;color:var(--ink-soft);text-align:left;padding:12px 14px;border-bottom:1.5px solid var(--line);}
+  .admin-table td{font-family:'Avenir Next',sans-serif;font-size:14px;padding:14px;border-bottom:1px solid var(--line);color:var(--ink);}
+  .admin-table tr:hover{background:#FBF6EE;}
+  .score-pill{font-family:'Avenir Next',sans-serif;font-weight:700;font-size:12.5px;padding:4px 12px;border-radius:999px;display:inline-block;}
+
+  .filter-pills{display:flex;gap:8px;margin-bottom:18px;}
+  .f-pill{
+    font-family:'Avenir Next',sans-serif;font-size:12.5px;font-weight:600;padding:6px 14px;border-radius:999px;
+    border:1px solid var(--line);background:var(--paper);color:var(--ink-soft);cursor:pointer;
+  }
+  .f-pill.active{background:var(--navy);color:white;border-color:var(--navy);}
+
+  @media (max-width:860px){
+    .hero-grid, .two-col, .bi-grid, .score-hero, .consultant-flex{flex-direction:column;display:flex;}
+    .problem-grid, .why-grid, .plans-grid, .cat-grid, .kpi-row, .swot-grid{grid-template-columns:1fr;}
+    .hero h1{font-size:36px;}
+    .nav-links{display:none;}
+  }
+</style>
+</head>
+<body>
+<div id="app"></div>
+
+<script>
+/* ============ BRAND ASSETS ============ */
+const LOGO_SRC = "/logo.svg";
+
+/* ============ CATEGORY META ============ */
+const CATEGORY_META = {
+  foundation: { label:'Business Foundation', color:'#0F2A5C', icon:'🏛️' },
+  marketing: { label:'Marketing', color:'#F5821F', icon:'📢' },
+  digital: { label:'Digital Presence', color:'#1E8A5F', icon:'🌐' },
+  technology: { label:'Technology', color:'#5B4FBF', icon:'💻' },
+  operations: { label:'Operations', color:'#C77A1F', icon:'⚙️' },
+  customer: { label:'Customer Growth', color:'#C0432F', icon:'👥' },
+  strategy: { label:'Strategy', color:'#0E7C86', icon:'🎯' },
+};
+
+/* ============ ASSESSMENT STRUCTURE ============ */
+const ASSESSMENT = [
+  { key:'foundation', title:'Business Foundation', questions:[
+    {id:'f1', text:'How long has your business been operating?', type:'choice', opts:[
+      {label:'Less than 1 year', v:1},{label:'1–3 years', v:2},{label:'3–7 years', v:3},{label:'7+ years', v:4}]},
+    {id:'f2', text:'Do you have a clearly defined target customer?', type:'choice', opts:[
+      {label:"No, we serve anyone who comes in", v:1},{label:'Roughly, but not written down', v:2},{label:'Yes, clearly defined', v:3}]},
+    {id:'f3', text:'Do you have a documented growth strategy or business plan?', type:'choice', opts:[
+      {label:'No plan at all', v:1},{label:'Some informal ideas', v:2},{label:'Yes, a working plan we revisit', v:3}]},
+    {id:'f4', text:'How would you rate your overall business stability right now?', type:'scale'},
+  ]},
+  { key:'marketing', title:'Marketing', questions:[
+    {id:'m1', text:'How do customers currently discover your business?', type:'choice', opts:[
+      {label:'Mostly walk-ins / word of mouth only', v:1},{label:'A mix of word of mouth and some online', v:2},{label:'Mostly through active online marketing', v:3}]},
+    {id:'m2', text:'How consistently do you generate new leads?', type:'choice', opts:[
+      {label:'Rarely / unpredictably', v:1},{label:'Occasionally, no set process', v:2},{label:'Consistently, with a repeatable process', v:3}]},
+    {id:'m3', text:'Do you run any paid marketing (ads, promotions)?', type:'choice', opts:[
+      {label:'Never', v:1},{label:'Occasionally', v:2},{label:'Regularly, and we track results', v:3}]},
+    {id:'m4', text:'How effectively do you retain existing customers?', type:'scale'},
+    {id:'m5', text:'Do you have a content or social media plan?', type:'choice', opts:[
+      {label:'No', v:1},{label:'We post now and then', v:2},{label:'Yes, a consistent plan', v:3}]},
+  ]},
+  { key:'digital', title:'Digital Presence', questions:[
+    {id:'d1', text:'Do you have an active website?', type:'choice', opts:[
+      {label:'No website', v:1},{label:'Yes, but outdated / rarely used', v:2},{label:'Yes, active and up to date', v:3}]},
+    {id:'d2', text:'Is your Google Business Profile set up and maintained?', type:'choice', opts:[
+      {label:'Not set up', v:1},{label:'Set up but not maintained', v:2},{label:'Set up and actively maintained', v:3}]},
+    {id:'d3', text:'How active is your business on social media?', type:'choice', opts:[
+      {label:'Not active', v:1},{label:'Occasionally active', v:2},{label:'Consistently active', v:3}]},
+    {id:'d4', text:'Rate your overall online visibility compared to competitors.', type:'scale'},
+  ]},
+  { key:'technology', title:'Technology', questions:[
+    {id:'t1', text:'Do you use any digital tools to manage day-to-day operations?', type:'choice', opts:[
+      {label:'No, mostly manual / paper-based', v:1},{label:'A few basic tools', v:2},{label:'Yes, integrated digital tools', v:3}]},
+    {id:'t2', text:'Do you use a CRM or customer database of any kind?', type:'choice', opts:[
+      {label:'No', v:1},{label:'A spreadsheet only', v:2},{label:'Yes, a proper CRM', v:3}]},
+    {id:'t3', text:'Do you accept digital payments (UPI, cards, etc.)?', type:'choice', opts:[
+      {label:'Cash only', v:1},{label:'Some digital options', v:2},{label:'Fully digital-ready', v:3}]},
+    {id:'t4', text:'How comfortable is your team with using new technology?', type:'scale'},
+  ]},
+  { key:'operations', title:'Operations', questions:[
+    {id:'o1', text:'Do you have documented processes for key tasks?', type:'choice', opts:[
+      {label:'No, mostly tribal knowledge', v:1},{label:'Some things are documented', v:2},{label:'Yes, key processes are documented', v:3}]},
+    {id:'o2', text:'How do you currently track inventory or service delivery?', type:'choice', opts:[
+      {label:'Manually / by memory', v:1},{label:'Basic spreadsheets', v:2},{label:'A dedicated system', v:3}]},
+    {id:'o3', text:'Do you regularly measure business performance (sales, costs, etc.)?', type:'choice', opts:[
+      {label:'Rarely', v:1},{label:'Occasionally', v:2},{label:'Regularly, with clear numbers', v:3}]},
+    {id:'o4', text:'Rate the efficiency of your day-to-day operations.', type:'scale'},
+  ]},
+  { key:'customer', title:'Customer Growth', questions:[
+    {id:'c1', text:'How do you currently track customers and their preferences?', type:'choice', opts:[
+      {label:"We don't track this", v:1},{label:'Informally, in our heads', v:2},{label:'In a system we can refer back to', v:3}]},
+    {id:'c2', text:'Do you collect customer feedback or reviews?', type:'choice', opts:[
+      {label:'No', v:1},{label:'Sometimes, informally', v:2},{label:'Yes, systematically', v:3}]},
+    {id:'c3', text:'What share of revenue comes from repeat customers?', type:'choice', opts:[
+      {label:'Mostly new customers', v:1},{label:'A mix of new and repeat', v:2},{label:'Mostly repeat customers', v:3}]},
+    {id:'c4', text:'Rate how well you understand your customers’ needs.', type:'scale'},
+  ]},
+  { key:'strategy', title:'Business Strategy', questions:[
+    {id:'s1', text:'Do you have a clear growth goal for the next 12 months?', type:'choice', opts:[
+      {label:'No specific goal', v:1},{label:'A rough idea', v:2},{label:'A clear, defined goal', v:3}]},
+    {id:'s2', text:'How often do you review business performance against goals?', type:'choice', opts:[
+      {label:'Rarely or never', v:1},{label:'A few times a year', v:2},{label:'Monthly or more often', v:3}]},
+    {id:'s3', text:'Do you currently work with any outside consultants or advisors?', type:'choice', opts:[
+      {label:'No', v:1},{label:'Occasionally, for specific needs', v:2},{label:'Yes, ongoing support', v:3}]},
+    {id:'s4', text:'Rate your confidence in your business’s growth direction.', type:'scale'},
+  ]},
+];
+
+const ONBOARD_TASKS = [
+  {id:'f1', day:'Day 1–5 · Foundation Setup', text:'Complete Google Business Profile'},
+  {id:'f2', day:'Day 1–5 · Foundation Setup', text:'Define target customer'},
+  {id:'f3', day:'Day 6–15 · Analysis & Strategy', text:'Review current marketing'},
+  {id:'f4', day:'Day 6–15 · Analysis & Strategy', text:'Set up lead tracking'},
+  {id:'f5', day:'Day 16–30 · Implementation', text:'Create first growth campaign'},
+];
+
+/* Default Consultant Profile */
+const DEFAULT_CONSULTANT = {
+  name: 'Dr. Aris Thorne',
+  title: 'Senior Director of SME Growth & Digital Transformation',
+  firm: 'SYNEX Advisory & Growth Partners',
+  credentials: 'Ex-McKinsey SME Practice · 15+ Yrs Advisory · 240+ Businesses Scaled',
+  phone: '+91 22 6120 4400',
+  whatsapp: '+91 98201 99887',
+  email: 'aris.thorne@synex.com',
+  availability: '🟢 Active & Online — Priority Partner Support',
+  nextReviewDate: 'Tuesday, Oct 14, 2026 at 3:30 PM',
+  reviewAgenda: 'Phase 1 Foundation Audit & Paid Lead Pipeline Verification',
+};
+
+/* ============ STATE ============ */
+let state = {
+  route: 'landing',
+  user: null,
+  token: localStorage.getItem('synex_token') || null,
+  business: { id: null, name:'', owner:'', type:'Retail Store', years:'1–3 years', plan:'Professional' },
+  consultant: DEFAULT_CONSULTANT,
+  stepIndex: 0,
+  answers: {},
+  overall: null,
+  catScores: null,
+  blueprint: null,
+  blueprintPhase: 1,
+  onboardingTasks: { f1:false, f2:false, f3:false, f4:false, f5:false },
+  cyclePhase: 0,
+  analytics: null,
+  consultantClients: [],
+  consultantFilter: 'All',
+  authMode: 'login',
+  authError: '',
+  authSuccess: '',
+};
+
+/* ============ API WRAPPER ============ */
+async function api(path, method = 'GET', body = null){
+  const headers = { 'Content-Type': 'application/json' };
+  if(state.token){
+    headers['Authorization'] = `Bearer ${state.token}`;
+  }
+  try{
+    const res = await fetch(path, {
+      method,
+      headers,
+      body: body ? JSON.stringify(body) : null,
+    });
+    const data = await res.json();
+    return { status: res.status, ok: res.ok, data };
+  } catch(err){
+    console.error('API Error:', err);
+    return { status: 0, ok: false, data: { success: false, message: 'Server communication error' } };
+  }
+}
+
+/* ============ ROUTING & SESSION ============ */
+function nav(route){
+  state.route = route;
+  state.authError = '';
+  state.authSuccess = '';
+  window.scrollTo(0,0);
+  if(route === 'consultant'){
+    loadConsultantData();
+  }
+  render();
+}
+
+async function checkAuthSession(){
+  if(!state.token) return;
+  const res = await api('/api/auth/me');
+  if(res.ok && res.data.user){
+    state.user = res.data.user;
+    if(res.data.business){
+      state.business = res.data.business;
+      await loadBusinessFullDetails(res.data.business.id);
+    }
+  } else {
+    state.token = null;
+    localStorage.removeItem('synex_token');
+  }
+  render();
+}
+
+async function loadBusinessFullDetails(bizId){
+  const res = await api(`/api/businesses/${bizId}`);
+  if(res.ok){
+    state.business = res.data.business;
+    if(res.data.consultant){
+      state.consultant = res.data.consultant;
+    }
+    if(res.data.assessment){
+      state.overall = res.data.assessment.overall_score;
+      state.catScores = res.data.assessment.category_scores;
+    }
+    if(res.data.blueprint){
+      state.blueprint = {
+        priorities: res.data.blueprint.priorities,
+        strongest: [],
+        weakest: [],
+      };
+      state.blueprintPhase = res.data.blueprint.roadmap_phase || 1;
+    }
+    if(res.data.tasks){
+      const taskMap = {};
+      res.data.tasks.forEach(t=>{ taskMap[t.task_key] = t.is_completed === 1; });
+      state.onboardingTasks = taskMap;
+    }
+    if(res.data.cycle){
+      state.cyclePhase = res.data.cycle.cycle_stage;
+    }
+    if(res.data.analytics){
+      state.analytics = res.data.analytics;
+    }
+    render();
+  }
+}
+
+async function loadConsultantData(){
+  const res = await api('/api/businesses');
+  if(res.ok && res.data.data){
+    state.consultantClients = res.data.data;
+  }
+  render();
+}
+
+function logout(){
+  state.token = null;
+  state.user = null;
+  state.business = { id: null, name:'', owner:'', type:'Retail Store', years:'1–3 years', plan:'Basic' };
+  state.overall = null;
+  state.catScores = null;
+  state.blueprint = null;
+  state.analytics = null;
+  state.onboardingTasks = { f1:false, f2:false, f3:false, f4:false, f5:false };
+  state.cyclePhase = 0;
+  localStorage.removeItem('synex_token');
+  nav('landing');
+}
+
+function healthLabel(score){
+  if(score>=75) return {label:'Strong', cls:'health-strong'};
+  if(score>=50) return {label:'Good', cls:'health-good'};
+  return {label:'Needs Improvement', cls:'health-weak'};
+}
+
+function scoreColor(v){
+  if(v>=75) return 'var(--green)';
+  if(v>=50) return 'var(--amber)';
+  return 'var(--red)';
+}
+
+function formatCurrency(val){
+  if(!val) return '₹4,50,000';
+  return '₹' + Number(val).toLocaleString('en-IN');
+}
+
+/* ============ TOPBAR ============ */
+function Topbar(){
+  const isLoggedIn = !!state.user;
+  const isConsultant = state.user && state.user.role === 'consultant';
+
+  return `
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="brand" onclick="nav('landing')">
+        <img src="${LOGO_SRC}" alt="SYNEX Phoenix Logo" />
+        <div class="brand-text">
+          <span>SYNEX</span>
+          <span>GROWTH PARTNER</span>
+        </div>
+      </div>
+      <div class="nav-links">
+        <div class="backend-badge">
+          <span class="pulse"></span>
+          <span>SQLite Backend Active</span>
+        </div>
+        <a href="#how" onclick="if(state.route!=='landing'){nav('landing');}">How it works</a>
+        <a href="#health" onclick="if(state.route!=='landing'){nav('landing');}">Health Check</a>
+        <button class="linklike" onclick="nav('consultant')">Consultant View</button>
+        ${isLoggedIn ? `
+          <button class="linklike" onclick="nav('dashboard')" style="font-weight:700;color:var(--navy);">Dashboard</button>
+          <span style="font-family:'Avenir Next',sans-serif;font-size:12.5px;color:var(--navy-deep);background:#EEEBDD;padding:4px 12px;border-radius:999px;font-weight:600;">
+            👤 ${state.user.name} (${state.user.role})
+          </span>
+          <button class="btn btn-ghost btn-sm" onclick="logout()">Sign Out</button>
+        ` : `
+          <button class="btn btn-ghost btn-sm" onclick="nav('login')">Sign In</button>
+          <button class="btn btn-primary btn-sm" onclick="nav('discovery')">Start Free Health Check</button>
+        `}
+      </div>
+    </div>
+  </div>`;
+}
+
+/* ============ LANDING PAGE ============ */
+function Landing(){
+  return `
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow-plain">Grow. Transform. Succeed.</div>
+        <h1>Your business growth partner —<br/>from <em>diagnosis</em> to growth.</h1>
+        <p class="lede">Discover what's holding your business back, get a clear growth roadmap, and track real progress with dedicated senior consultant oversight and continuous data analytics.</p>
+        <div class="hero-ctas">
+          <button class="btn btn-primary" onclick="nav('discovery')">Start Free Business Health Check</button>
+          <button class="btn btn-ghost" onclick="nav('login')">Client & Consultant Login</button>
+        </div>
+        <div class="hero-note">✓ Transparent Scoring · ✓ 90-Day Blueprint · ✓ Dedicated Senior Consultant</div>
+      </div>
+      <div class="phoenix-card">
+        <img src="${LOGO_SRC}" alt="SYNEX Phoenix Logo" class="logo-hero" />
+        <h4 style="font-size:18px;color:var(--navy-deep);margin-bottom:6px;">SYNEX Transformation Journey</h4>
+        <p style="font-size:12.5px;color:var(--ink-soft);margin-bottom:12px;">The systematic framework for sustainable SME growth</p>
+        <div class="journey-mini">
+          <div class="step done"><div class="dot"></div><span>Free Business Discovery</span></div>
+          <div class="connector"></div>
+          <div class="step done"><div class="dot"></div><span>Digital Health Check</span></div>
+          <div class="connector"></div>
+          <div class="step done"><div class="dot"></div><span>Business Growth Score</span></div>
+          <div class="connector"></div>
+          <div class="step"><div class="dot"></div><span>Personalized Growth Blueprint</span></div>
+          <div class="connector"></div>
+          <div class="step"><div class="dot"></div><span>Structured 30-Day Onboarding</span></div>
+          <div class="connector"></div>
+          <div class="step"><div class="dot"></div><span>Monthly Strategic Growth Cycle</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Local businesses juggle too many disconnected fixes.</h2>
+        <p>Marketing agencies, IT consultants, business coaches — each solves one piece, at a cost, without a shared view of the whole business.</p>
+      </div>
+      <div class="problem-grid">
+        <div class="problem-item"><h4>Weak digital presence</h4><p>No website, inactive social, low visibility where customers actually search.</p></div>
+        <div class="problem-item"><h4>Fragmented support</h4><p>A different vendor for marketing, tech, and strategy — nothing joined up.</p></div>
+        <div class="problem-item"><h4>No clear roadmap</h4><p>Owners know something's off, but not what to fix first, or in what order.</p></div>
+        <div class="problem-item"><h4>No way to measure progress</h4><p>Growth efforts happen, but there's no score, no tracking, no accountability.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="how">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>One partner, every step.</h2>
+        <p>Marketing + Technology + Strategy in one place — a single, structured journey instead of scattered fixes.</p>
+      </div>
+      <div class="flow-row">
+        ${['Free Discovery','Health Check','Growth Score','Growth Blueprint','Onboarding','Monthly Cycle'].map((t,i,arr)=>`
+          <div class="flow-card"><div class="num">0${i+1}</div><h4>${t}</h4><p>${[
+            'Understand the business, goals and challenges in one conversation.',
+            'Evaluate digital presence, marketing, tech and operations.',
+            'A transparent, measurable score across every area.',
+            'A tailored 90-day roadmap with clear priorities.',
+            'First 30 days of guided foundation and setup work.',
+            'Collect data, review performance, adjust strategy — every month.'
+          ][i]}</p></div>
+          ${i<arr.length-1?'<div class="flow-arrow">→</div>':''}
+        `).join('')}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="health">
+    <div class="wrap two-col">
+      <div>
+        <div class="section-head" style="margin-bottom:20px">
+          <h2>See your Business Growth Score.</h2>
+          <p>A comprehensive 29-metric health check across seven areas of your business, scored transparently and benchmarked against peer SME data.</p>
+        </div>
+        <button class="btn btn-primary" onclick="nav('discovery')">Start Free Business Health Check</button>
+      </div>
+      <div class="mini-score-demo">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;">
+          <span class="sans" style="font-size:13px;color:var(--ink-soft);font-weight:600;">Sample Growth Score</span>
+          <span class="health-tag health-good">Good (67/100)</span>
+        </div>
+        ${['Business Foundation:72','Marketing:55','Digital Presence:81','Technology:48','Operations:64','Customer Growth:70','Strategy:65'].map(row=>{
+          const [k,v]=row.split(':');
+          return `<div style="margin-bottom:12px;">
+            <div style="display:flex;justify-content:space-between;font-family:'Avenir Next',sans-serif;font-size:13px;color:var(--ink-soft);margin-bottom:5px;"><span>${k}</span><span style="font-weight:700;color:var(--ink);">${v}%</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:${v}%;background:var(--navy);"></div></div>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>The Monthly Growth Cycle.</h2>
+        <p>Growth isn't a one-time report. Every month, SYNEX runs the same disciplined loop with your dedicated consultant.</p>
+      </div>
+      <div class="cycle-ring">
+        ${['Collect Data','Analyze Performance','Growth Report','Strategy Meeting','Execute Improvements'].map((s,i,arr)=>`
+          <div class="cycle-step"><div class="icon">${i+1}</div><span>${s}</span></div>
+          ${i<arr.length-1?'<div class="cycle-arrow">→</div>':''}
+        `).join('')}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Why business owners choose SYNEX.</h2>
+      </div>
+      <div class="why-grid">
+        <div class="why-card"><h4>Integrated, not fragmented</h4><p>One growth partner across marketing, technology and strategy — instead of coordinating three vendors.</p></div>
+        <div class="why-card"><h4>Measurable from day one</h4><p>A transparent Growth Score means you can see exactly where you stand and track real change.</p></div>
+        <div class="why-card"><h4>Senior Consulting Caliber</h4><p>Backed by experienced advisors with McKinsey and Big-4 pedigree, custom-sized for SME budgets.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="membership">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>A long-term growth partnership.</h2>
+        <p>Membership isn't a subscription — it's an ongoing partnership for continuous, measurable growth.</p>
+      </div>
+      <div class="plans-grid">
+        <div class="plan-card">
+          <h4>Basic</h4>
+          <div class="price">Contact SYNEX for pricing</div>
+          <ul>
+            <li>Health Check &amp; Growth Score</li>
+            <li>Personalized Growth Blueprint</li>
+            <li>Quarterly strategy check-in</li>
+            <li>Access to client dashboard</li>
+          </ul>
+          <button class="btn btn-ghost" onclick="nav('discovery')">Get Started</button>
+        </div>
+        <div class="plan-card featured">
+          <div class="plan-badge">Most Popular</div>
+          <h4>Professional</h4>
+          <div class="price">Contact SYNEX for pricing</div>
+          <ul>
+            <li>Everything in Basic</li>
+            <li>Dedicated senior growth consultant</li>
+            <li>Monthly Growth Cycle reviews &amp; BI reporting</li>
+            <li>Marketing &amp; technology implementation support</li>
+          </ul>
+          <button class="btn btn-primary" onclick="nav('discovery')">Get Started</button>
+        </div>
+        <div class="plan-card">
+          <h4>Premium</h4>
+          <div class="price">Contact SYNEX for pricing</div>
+          <ul>
+            <li>Everything in Professional</li>
+            <li>Priority WhatsApp &amp; phone line access</li>
+            <li>End-to-End Technology Transformation</li>
+            <li>Quarterly on-site executive strategy sessions</li>
+          </ul>
+          <button class="btn btn-ghost" onclick="nav('discovery')">Get Started</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="final-cta">
+        <h2>Know exactly what to work on next.</h2>
+        <p>Start with a free Business Health Check — no commitment, just clarity.</p>
+        <div class="hero-ctas">
+          <button class="btn btn-primary" onclick="nav('discovery')">Start Free Business Health Check</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <img src="${LOGO_SRC}" style="height:28px;width:28px;border-radius:6px;"/>
+        <span class="sans" style="font-weight:700;color:var(--navy);">SYNEX</span>
+      </div>
+      <span>One Partner. Every Step. Endless Growth. — Connected to SQLite Backend Engine</span>
+    </div>
+  </footer>`;
+}
+
+/* ============ AUTH / LOGIN ============ */
+function AuthPage(){
+  const isLogin = state.authMode === 'login';
+
+  return `
+  <div class="auth-shell">
+    <div class="auth-card">
+      <div style="text-align:center;margin-bottom:24px;">
+        <img src="${LOGO_SRC}" style="height:52px;width:52px;margin:0 auto 12px;border-radius:10px;" />
+        <h2 style="font-family:'Iowan Old Style',Georgia,serif;font-size:26px;color:var(--navy-deep);">
+          ${isLogin ? 'Sign In to SYNEX' : 'Register New SME'}
+        </h2>
+        <p style="font-family:'Avenir Next',sans-serif;font-size:13.5px;color:var(--ink-soft);margin-top:6px;">
+          ${isLogin ? 'Access your growth score, blueprint & dashboard' : 'Join the SYNEX SME growth ecosystem'}
+        </p>
+      </div>
+
+      <div class="auth-tabs">
+        <button class="auth-tab ${isLogin ? 'active' : ''}" onclick="state.authMode='login';state.authError='';render()">Sign In</button>
+        <button class="auth-tab ${!isLogin ? 'active' : ''}" onclick="state.authMode='register';state.authError='';render()">Create Account</button>
+      </div>
+
+      ${state.authError ? `<div class="alert-banner alert-error">${state.authError}</div>` : ''}
+      ${state.authSuccess ? `<div class="alert-banner alert-success">${state.authSuccess}</div>` : ''}
+
+      <form id="authForm" onsubmit="handleAuthSubmit(event)">
+        ${!isLogin ? `
+          <div class="auth-field">
+            <label class="auth-label">Owner Full Name</label>
+            <input class="auth-input" id="auth_name" placeholder="e.g. Rahul Sharma" required />
+          </div>
+          <div class="auth-field">
+            <label class="auth-label">Business Name</label>
+            <input class="auth-input" id="auth_biz_name" placeholder="e.g. Apex Electronics & Goods" required />
+          </div>
+          <div class="auth-field">
+            <label class="auth-label">Business Industry</label>
+            <select class="auth-input" id="auth_biz_type">
+              <option value="Retail Store">Retail Store</option>
+              <option value="Restaurant / Cafe">Restaurant / Cafe</option>
+              <option value="Service Business">Service Business</option>
+              <option value="Manufacturer">Manufacturer</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+        ` : ''}
+
+        <div class="auth-field">
+          <label class="auth-label">Email Address</label>
+          <input type="email" class="auth-input" id="auth_email" placeholder="owner@business.com" required />
+        </div>
+
+        <div class="auth-field">
+          <label class="auth-label">Password</label>
+          <input type="password" class="auth-input" id="auth_password" placeholder="••••••••" required />
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:14px;padding:12px;">
+          ${isLogin ? 'Sign In to SYNEX' : 'Create Account & Begin Diagnosis'}
+        </button>
+      </form>
+
+      ${isLogin ? `
+        <div class="demo-accounts">
+          <div class="demo-label">⚡ 1-Click Demo Login (Pre-seeded Database):</div>
+          <div class="demo-grid">
+            <button class="demo-pill" onclick="quickLogin('admin@synex.com','admin123')">
+              👨‍💼 Consultant (Dr. Aris Thorne)
+            </button>
+            <button class="demo-pill" onclick="quickLogin('shree@synex.com','password123')">
+              🏪 Shree Traders (Score: 67)
+            </button>
+            <button class="demo-pill" onclick="quickLogin('coastal@synex.com','password123')">
+              ☕ Coastal Bites Cafe (Score: 48)
+            </button>
+            <button class="demo-pill" onclick="quickLogin('patil@synex.com','password123')">
+              ⚙️ Patil Fabricators (Score: 81)
+            </button>
+            <button class="demo-pill" onclick="quickLogin('urbanfit@synex.com','password123')">
+              🏋️ UrbanFit Studio (Score: 59)
+            </button>
+            <button class="demo-pill" onclick="quickLogin('apex@synex.com','password123')">
+              🚚 Apex Logistics (Score: 74)
+            </button>
+          </div>
+        </div>
+      ` : ''}
+    </div>
+  </div>`;
+}
+
+async function quickLogin(email, password){
+  const eInput = document.getElementById('auth_email');
+  const pInput = document.getElementById('auth_password');
+  if(eInput && pInput){
+    eInput.value = email;
+    pInput.value = password;
+  }
+  executeLogin(email, password);
+}
+
+async function handleAuthSubmit(e){
+  e.preventDefault();
+  const email = document.getElementById('auth_email').value;
+  const password = document.getElementById('auth_password').value;
+
+  if(state.authMode === 'login'){
+    executeLogin(email, password);
+  } else {
+    const name = document.getElementById('auth_name').value;
+    const businessName = document.getElementById('auth_biz_name').value;
+    const businessType = document.getElementById('auth_biz_type').value;
+
+    const res = await api('/api/auth/register', 'POST', {
+      name,
+      email,
+      password,
+      businessName,
+      businessType,
+      yearsOperating: '1–3 years',
+    });
+
+    if(res.ok){
+      state.token = res.data.token;
+      state.user = res.data.user;
+      state.business = res.data.business;
+      localStorage.setItem('synex_token', res.data.token);
+      state.authSuccess = 'Account created successfully! Loading...';
+      render();
+      setTimeout(()=>{ nav('discovery'); }, 500);
+    } else {
+      state.authError = res.data.message || 'Registration failed.';
+      render();
+    }
+  }
+}
+
+async function executeLogin(email, password){
+  state.authError = '';
+  const res = await api('/api/auth/login', 'POST', { email, password });
+  if(res.ok){
+    state.token = res.data.token;
+    state.user = res.data.user;
+    localStorage.setItem('synex_token', res.data.token);
+
+    if(res.data.business){
+      state.business = res.data.business;
+      await loadBusinessFullDetails(res.data.business.id);
+      nav('dashboard');
+    } else if(res.data.user.role === 'consultant'){
+      nav('consultant');
+    } else {
+      nav('discovery');
+    }
+  } else {
+    state.authError = res.data.message || 'Invalid credentials.';
+    render();
+  }
+}
+
+/* ============ DISCOVERY ============ */
+function Discovery(){
+  const b = state.business;
+  const isValid = b.name && (b.owner || b.owner_name) && (b.type || b.business_type);
+
+  return `
+  <div class="assess-shell">
+    <div class="step-title">FREE BUSINESS DISCOVERY</div>
+    <div class="step-h">Tell us a little about your business</div>
+    <div class="q-block">
+      <div class="q-text">Business name</div>
+      <input class="field-input" id="disc_name" value="${b.name || ''}" 
+        oninput="state.business.name=this.value;checkDiscoveryValid()" placeholder="e.g. Shree Traders"/>
+    </div>
+    <div class="q-block">
+      <div class="q-text">Your name</div>
+      <input class="field-input" id="disc_owner" value="${b.owner || b.owner_name || ''}" 
+        oninput="state.business.owner=this.value;state.business.owner_name=this.value;checkDiscoveryValid()" placeholder="e.g. Rakesh Patil"/>
+    </div>
+    <div class="q-block">
+      <div class="q-text">What type of business is it?</div>
+      <div class="opts">
+        ${['Retail Store','Restaurant / Cafe','Service Business','Manufacturer','Other'].map(t=>`
+          <button class="opt ${b.type===t || b.business_type===t ?'selected':''}" onclick="state.business.type='${t}';state.business.business_type='${t}';render()">
+            <span class="radio"></span>${t}
+          </button>`).join('')}
+      </div>
+    </div>
+    <div class="q-block">
+      <div class="q-text">How many years have you been operating?</div>
+      <div class="opts">
+        ${['Less than 1 year','1–3 years','3–7 years','7+ years'].map(t=>`
+          <button class="opt ${b.years===t || b.years_operating===t ?'selected':''}" onclick="state.business.years='${t}';state.business.years_operating='${t}';render()">
+            <span class="radio"></span>${t}
+          </button>`).join('')}
+      </div>
+    </div>
+    <div class="step-nav">
+      <button class="btn btn-ghost" onclick="nav('landing')">Back</button>
+      <button class="btn btn-primary" id="btnContinueDiscovery" ${!isValid?'disabled':''} onclick="nav('assessment')">
+        Continue to Health Check →
+      </button>
+    </div>
+  </div>`;
+}
+
+function checkDiscoveryValid(){
+  const nameVal = document.getElementById('disc_name') ? document.getElementById('disc_name').value : state.business.name;
+  const ownerVal = document.getElementById('disc_owner') ? document.getElementById('disc_owner').value : state.business.owner;
+  const btn = document.getElementById('btnContinueDiscovery');
+  if(btn){
+    btn.disabled = !(nameVal && ownerVal);
+  }
+}
+
+/* ============ ASSESSMENT ============ */
+function Assessment(){
+  const section = ASSESSMENT[state.stepIndex];
+  const total = ASSESSMENT.length;
+  const pct = Math.round(((state.stepIndex)/total)*100);
+  const allAnswered = section.questions.every(q=>state.answers[q.id]!=null);
+
+  return `
+  <div class="assess-shell">
+    <div class="progress-track"><div class="progress-fill" style="width:${pct}%"></div></div>
+    <div class="progress-label"><span>Step ${state.stepIndex+1} of ${total}</span><span>${pct}% complete</span></div>
+    <div class="step-title">BUSINESS HEALTH CHECK</div>
+    <div class="step-h">${section.title}</div>
+    ${section.questions.map(q=>{
+      if(q.type==='choice'){
+        return `<div class="q-block">
+          <div class="q-text">${q.text}</div>
+          <div class="opts">
+            ${q.opts.map(o=>`
+              <button class="opt ${state.answers[q.id]===o.v?'selected':''}" onclick="setAnswer('${q.id}',${o.v})">
+                <span class="radio"></span>${o.label}
+              </button>`).join('')}
+          </div>
+        </div>`;
+      } else {
+        const val = state.answers[q.id];
+        return `<div class="q-block">
+          <div class="q-text">${q.text}</div>
+          <div class="opts" style="flex-direction:row;gap:8px;">
+            ${[1,2,3,4,5].map(n=>`
+              <button class="opt ${val===n?'selected':''}" style="flex:1;justify-content:center;padding:12px 0;" onclick="setAnswer('${q.id}',${n})">${n}</button>
+            `).join('')}
+          </div>
+          <div style="display:flex;justify-content:space-between;font-family:'Avenir Next',sans-serif;font-size:11.5px;color:var(--ink-soft);margin-top:6px;"><span>1 (Lagging)</span><span>5 (Industry Best)</span></div>
+        </div>`;
+      }
+    }).join('')}
+    <div class="step-nav">
+      <button class="btn btn-ghost" onclick="prevStep()">${state.stepIndex===0?'Back':'Previous'}</button>
+      <button class="btn btn-primary" ${!allAnswered?'disabled':''} onclick="nextStep()">${state.stepIndex===total-1?'Submit & See Full Analysis →':'Next'}</button>
+    </div>
+  </div>`;
+}
+
+function setAnswer(id,v){ state.answers[id]=v; render(); }
+function prevStep(){ if(state.stepIndex===0){nav('discovery');return;} state.stepIndex--; window.scrollTo(0,0); render(); }
+
+async function nextStep(){
+  if(state.stepIndex === ASSESSMENT.length - 1){
+    const payload = {
+      businessId: state.business.id || null,
+      businessData: {
+        name: state.business.name || 'My Business',
+        owner: state.business.owner || state.business.owner_name || 'Business Owner',
+        type: state.business.type || state.business.business_type || 'Retail Store',
+        years: state.business.years || state.business.years_operating || '1–3 years',
+      },
+      answers: state.answers,
+    };
+
+    const res = await api('/api/assessments', 'POST', payload);
+    if(res.ok && res.data){
+      state.business.id = res.data.businessId;
+      state.overall = res.data.overall;
+      state.catScores = res.data.catScores;
+      state.blueprint = res.data.blueprint;
+      state.analytics = res.data.analytics;
+    }
+    nav('score');
+    return;
+  }
+  state.stepIndex++;
+  window.scrollTo(0,0);
+  render();
+}
+
+/* ============ SCORE & DETAILED DIAGNOSTIC PAGE ============ */
+function ScorePage(){
+  const overall = state.overall ?? 67;
+  const cats = state.catScores || { foundation:72, marketing:55, digital:45, technology:68, operations:75, customer:80, strategy:70 };
+  const health = healthLabel(overall);
+  const circumference = 2*Math.PI*100;
+  const dash = (overall/100)*circumference;
+  const bp = state.blueprint || { priorities:[] };
+  const ana = state.analytics;
+
+  return `
+  <div class="app-shell">
+    <div class="section-title-row">
+      <h2>Your Business Growth Score &amp; Diagnostics</h2>
+      <div class="backend-badge"><span class="pulse"></span> Stored in SQLite Database</div>
+    </div>
+
+    <!-- Assigned Consultant Banner -->
+    ${ConsultantBanner()}
+
+    <!-- Score Dial & Assessment Overview -->
+    <div class="score-hero">
+      <div class="score-dial">
+        <svg width="230" height="230" viewBox="0 0 220 220">
+          <circle cx="110" cy="110" r="100" fill="none" stroke="#E4E1D8" stroke-width="14"/>
+          <circle cx="110" cy="110" r="100" fill="none" stroke="${scoreColor(overall)}" stroke-width="14"
+            stroke-dasharray="${dash} ${circumference}" stroke-linecap="round"/>
+        </svg>
+        <div class="num"><div class="n">${overall}</div><div class="lbl">/ 100</div></div>
+      </div>
+      <div>
+        <span class="health-tag ${health.cls}">${health.label}</span>
+        <h3 style="font-family:'Iowan Old Style',Georgia,serif;font-weight:400;font-size:25px;color:var(--navy-deep);margin-bottom:10px;">
+          ${state.business.name || 'Your Business'} scored ${overall} / 100 on the SYNEX Framework.
+        </h3>
+        <p style="color:var(--ink-soft);max-width:520px;margin-bottom:18px;">
+          ${overall>=75 ? 'Strong foundation across core pillars. Focus now shifts to fine-tuning digital scaling and operational delegation.' : overall>=50 ? 'Solid business with high untapped revenue potential. A few focused levers in digital marketing and tech automation will drive rapid gains.' : 'Critical foundational and technology gaps are capping growth. Immediate guided restructuring recommended to stop margin leakage.'}
+        </p>
+        <div style="display:flex;gap:12px;">
+          <button class="btn btn-primary" onclick="nav('blueprint')">View 90-Day Blueprint →</button>
+          <button class="btn btn-ghost" onclick="nav('dashboard')">Open Client Dashboard</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Category Scores Breakdown -->
+    <div class="cat-grid">
+      ${Object.entries(cats).map(([k,v])=>`
+        <div class="cat-card">
+          <div class="top">
+            <h4>${CATEGORY_META[k]? CATEGORY_META[k].icon + ' ' + CATEGORY_META[k].label : k}</h4>
+            <span class="score" style="color:${scoreColor(v)}">${v}%</span>
+          </div>
+          <div class="bar-track"><div class="bar-fill" style="width:${v}%;background:${scoreColor(v)}"></div></div>
+        </div>`).join('')}
+    </div>
+
+    <!-- Deep Business Intelligence Panel -->
+    ${DeepAnalyticsSection(ana, cats)}
+
+    <div class="section-title-row" style="margin-top:36px;"><h2>Top 3 Strategic Transformation Priorities</h2></div>
+    ${bp.priorities.map((p,i)=>`
+      <div class="opp-card">
+        <div class="head">
+          <h4>${i+1}. Improve ${CATEGORY_META[p.key]? CATEGORY_META[p.key].label : p.key}</h4>
+          <div class="opp-tags">
+            <span class="tag tag-impact-${(p.impact||'high').toLowerCase()}">Impact: ${p.impact||'High'}</span>
+            <span class="tag tag-effort">Effort: ${p.effort||'Medium'}</span>
+          </div>
+        </div>
+        <div class="problem">${p.problem}</div>
+        <div style="font-family:'Avenir Next',sans-serif;font-size:13px;font-weight:700;color:var(--navy-deep);margin-bottom:6px;">Recommended Actions</div>
+        <ol>${(p.actions||[]).map(a=>`<li>${a}</li>`).join('')}</ol>
+      </div>`).join('')}
+
+    <div class="cta-banner" style="margin-top:30px;">
+      <div>
+        <h3>Ready to execute your transformation?</h3>
+        <p>Review the full 90-day phase roadmap or collaborate directly with ${state.consultant.name}.</p>
+      </div>
+      <button class="btn btn-primary" onclick="nav('blueprint')">Open Growth Blueprint</button>
+    </div>
+  </div>`;
+}
+
+/* ============ CONSULTANT SHOWCASE BANNER ============ */
+function ConsultantBanner(){
+  const c = state.consultant || DEFAULT_CONSULTANT;
+
+  return `
+  <div class="consultant-card">
+    <div class="consultant-flex">
+      <div class="consultant-avatar">👨‍💼</div>
+      <div class="consultant-meta">
+        <div style="font-family:'Avenir Next',sans-serif;font-size:11px;letter-spacing:0.06em;color:rgba(255,255,255,0.7);text-transform:uppercase;font-weight:700;">
+          Assigned Senior Growth Advisor
+        </div>
+        <h3>${c.name}</h3>
+        <div class="role">${c.title}</div>
+        <p>${c.credentials}</p>
+        <div class="consultant-badges">
+          <div class="c-pill"><span>📅</span> Next Review: <strong>${c.nextReviewDate}</strong></div>
+          <div class="c-pill"><span>${c.availability.split(' ')[0]}</span> <strong>${c.availability.substring(2)}</strong></div>
+          <div class="c-pill"><span>📞</span> Direct: <strong>${c.phone}</strong></div>
+        </div>
+      </div>
+      <div class="consultant-actions">
+        <button class="btn btn-primary btn-sm" onclick="alert('Connecting with Dr. Aris Thorne via WhatsApp (+91 98201 99887)...')">
+          💬 Message on WhatsApp
+        </button>
+        <button class="btn btn-ghost btn-sm" style="color:white;border-color:white;" onclick="alert('Strategy call scheduled with Dr. Aris Thorne for Tuesday, Oct 14 at 3:30 PM.')">
+          📅 Schedule 1-on-1 Call
+        </button>
+      </div>
+    </div>
+  </div>`;
+}
+
+/* ============ DEEP DATA ANALYTICS & BI COMPONENT ============ */
+function DeepAnalyticsSection(ana, cats){
+  const fin = ana && ana.financials ? ana.financials : {
+    estimatedRevenueLeakage: 640000,
+    projectedGrowthPercent: 28,
+    cacEfficiency: 78,
+    operationalFrictionIndex: 26,
+    customerRetentionRate: 72,
+    scalabilityScore: 74,
+  };
+
+  const comp = ana && ana.categoryComparison ? ana.categoryComparison : {};
+  const swot = ana && ana.swot ? ana.swot : {
+    strengths: ['Strong core business foundation and customer loyalty', 'High repeat transaction rate among established clients'],
+    weaknesses: ['Limited digital discovery and inconsistent paid lead pipeline', 'Manual operational documentation creates scaling drag'],
+    opportunities: ['Deploy automated review collection and Google Business optimization (+20% lead lift)', 'Implement unified CRM and digital invoicing'],
+    threats: ['Local competitors aggressively investing in targeted digital ads'],
+  };
+
+  return `
+  <div style="margin:24px 0;">
+    <div class="section-title-row">
+      <h2>Deep Business Intelligence &amp; Industry Benchmarks</h2>
+      <span class="sans" style="font-size:13px;color:var(--ink-soft);font-weight:600;">Benchmark: ${state.business.business_type || state.business.type || 'SME Peer Group'}</span>
+    </div>
+
+    <!-- 4 High Impact Financial KPIs -->
+    <div class="kpi-row">
+      <div class="kpi-card">
+        <div class="lbl">Estimated Revenue Upside</div>
+        <div class="val" style="color:var(--green)">${formatCurrency(fin.estimatedRevenueLeakage)}</div>
+        <div class="sub" style="color:var(--green)">Recoverable annual leakage</div>
+      </div>
+      <div class="kpi-card">
+        <div class="lbl">90-Day Growth Trajectory</div>
+        <div class="val" style="color:var(--orange)">+${fin.projectedGrowthPercent}%</div>
+        <div class="sub" style="color:var(--ink-soft)">With Blueprint Execution</div>
+      </div>
+      <div class="kpi-card">
+        <div class="lbl">CAC Efficiency Rating</div>
+        <div class="val">${fin.cacEfficiency}%</div>
+        <div class="sub" style="color:var(--green)">✓ Top 20th Percentile</div>
+      </div>
+      <div class="kpi-card">
+        <div class="lbl">Operational Friction Index</div>
+        <div class="val" style="color:${fin.operationalFrictionIndex>50?'var(--red)':'var(--navy)'}">${fin.operationalFrictionIndex}%</div>
+        <div class="sub" style="color:var(--ink-soft)">Workflow Drag</div>
+      </div>
+    </div>
+
+    <!-- Benchmark Comparison & SWOT Grid -->
+    <div class="bi-grid">
+      <div class="panel">
+        <h3>📊 Performance vs. Industry Benchmark</h3>
+        <p style="font-size:13px;color:var(--ink-soft);margin-bottom:18px;">
+          Comparing <strong>${state.business.name || 'Your Business'}</strong> against 180+ verified ${state.business.business_type || state.business.type || 'SME'} peers.
+        </p>
+
+        ${Object.keys(cats).map(k=>{
+          const clientScore = cats[k];
+          const info = comp[k] || { industryAvg: 55, variance: clientScore - 55 };
+          const benchAvg = info.industryAvg;
+          const delta = clientScore - benchAvg;
+          return `
+          <div class="bench-row">
+            <div class="bench-labels">
+              <span><strong>${CATEGORY_META[k]? CATEGORY_META[k].icon + ' ' + CATEGORY_META[k].label : k}</strong></span>
+              <span>
+                Client: <strong>${clientScore}%</strong> · Industry Avg: <strong>${benchAvg}%</strong>
+                <span class="bench-delta" style="color:${delta>=0?'var(--green)':'var(--red)'};margin-left:6px;">
+                  (${delta>=0?'+'+delta:delta}%)
+                </span>
+              </span>
+            </div>
+            <div class="bench-bars">
+              <div class="bench-bar-client" style="width:${clientScore}%;background:${scoreColor(clientScore)};"></div>
+              <div class="bench-target-line" style="left:${benchAvg}%;" title="Industry Benchmark: ${benchAvg}%"></div>
+            </div>
+          </div>`;
+        }).join('')}
+      </div>
+
+      <div class="panel">
+        <h3>🎯 Strategic SWOT Diagnosis</h3>
+        <div class="swot-grid">
+          <div class="swot-box swot-s">
+            <h5 style="color:var(--green);">Strengths</h5>
+            <ul>${swot.strengths.map(s=>`<li>${s}</li>`).join('')}</ul>
+          </div>
+          <div class="swot-box swot-w">
+            <h5 style="color:var(--red);">Weaknesses</h5>
+            <ul>${swot.weaknesses.map(w=>`<li>${w}</li>`).join('')}</ul>
+          </div>
+          <div class="swot-box swot-o">
+            <h5 style="color:#1E70BF;">Opportunities</h5>
+            <ul>${swot.opportunities.map(o=>`<li>${o}</li>`).join('')}</ul>
+          </div>
+          <div class="swot-box swot-t">
+            <h5 style="color:var(--amber);">Threats</h5>
+            <ul>${swot.threats.map(t=>`<li>${t}</li>`).join('')}</ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+/* ============ BLUEPRINT ============ */
+function Blueprint(){
+  const bp = state.blueprint || { priorities:[] };
+  const phase = state.blueprintPhase || 1;
+  const phaseContent = {
+    1: {name:'Foundation & Setup', range:'Days 1–30', items: bp.priorities.map(p=>p.actions ? p.actions[0] : 'Foundation baseline setup')},
+    2: {name:'Strategy & Pipeline', range:'Days 31–60', items: bp.priorities.map(p=>p.actions ? (p.actions[1]||p.actions[0]) : 'Growth strategy definition')},
+    3: {name:'Full Scale Implementation', range:'Days 61–90', items: bp.priorities.map(p=>p.actions ? (p.actions[2]||p.actions[p.actions.length-1]) : 'Marketing & tech execution')},
+  };
+
+  return `
+  <div class="app-shell">
+    <div class="section-title-row">
+      <h2>Your Personalized Growth Blueprint</h2>
+      <div style="display:flex;gap:10px;">
+        <button class="btn btn-ghost btn-sm" onclick="nav('dashboard')">Open Dashboard →</button>
+      </div>
+    </div>
+
+    ${ConsultantBanner()}
+
+    <p style="color:var(--ink-soft);max-width:680px;margin-bottom:28px;">
+      Tailored 90-day transformation plan for <strong>${state.business.name||'your business'}</strong> based on your SYNEX health check score (<strong>${state.overall || 67}/100</strong>).
+    </p>
+
+    <div class="panel">
+      <h3>Recommended Priorities</h3>
+      ${bp.priorities.map((p,i)=>`
+        <div class="opp-card" style="margin-bottom:${i===bp.priorities.length-1?'0':'16px'}">
+          <div class="head">
+            <h4>${i+1}. Improve ${CATEGORY_META[p.key]? CATEGORY_META[p.key].label : p.key}</h4>
+            <div class="opp-tags">
+              <span class="tag tag-impact-${(p.impact||'high').toLowerCase()}">Impact: ${p.impact||'High'}</span>
+              <span class="tag tag-effort">Effort: ${p.effort||'Medium'}</span>
+            </div>
+          </div>
+          <div class="problem"><strong>Problem:</strong> ${p.problem}</div>
+          <div style="font-family:'Avenir Next',sans-serif;font-size:13px;font-weight:700;color:var(--navy-deep);margin-bottom:6px;">Recommended Actions</div>
+          <ol>${(p.actions||[]).map(a=>`<li>${a}</li>`).join('')}</ol>
+        </div>`).join('')}
+    </div>
+
+    <div class="section-title-row"><h2>90-Day Growth Roadmap Phases</h2></div>
+    <div class="phase-tabs">
+      <button class="phase-tab ${phase===1?'active':''}" onclick="setRoadmapPhase(1)">Phase 1 — Foundation (Days 1–30)</button>
+      <button class="phase-tab ${phase===2?'active':''}" onclick="setRoadmapPhase(2)">Phase 2 — Strategy (Days 31–60)</button>
+      <button class="phase-tab ${phase===3?'active':''}" onclick="setRoadmapPhase(3)">Phase 3 — Scale (Days 61–90)</button>
+    </div>
+    <div class="panel">
+      <div style="font-family:'Avenir Next',sans-serif;font-weight:700;font-size:13px;color:var(--orange-deep);margin-bottom:4px;">${phaseContent[phase].range}</div>
+      <h3>${phaseContent[phase].name}</h3>
+      <ul style="list-style:none;padding:0;margin-top:14px;">
+        ${phaseContent[phase].items.map(item=>`<li style="font-size:14.5px;color:var(--ink);padding:10px 0;border-top:1px solid var(--line);">✓ ${item}</li>`).join('')}
+      </ul>
+    </div>
+
+    <div class="cta-banner">
+      <div>
+        <h3>Ready to execute your onboarding?</h3>
+        <p>Begin guided task execution and track your live progress.</p>
+      </div>
+      <button class="btn btn-primary" onclick="nav('onboarding')">Start 30-Day Onboarding</button>
+    </div>
+  </div>`;
+}
+
+async function setRoadmapPhase(p){
+  state.blueprintPhase = p;
+  render();
+  if(state.business.id){
+    await api(`/api/sync/${state.business.id}/roadmap-phase`, 'PATCH', { phase: p });
+  }
+}
+
+/* ============ ONBOARDING ============ */
+function Onboarding(){
+  const done = Object.values(state.onboardingTasks).filter(Boolean).length;
+  const pct = Math.round((done/ONBOARD_TASKS.length)*100);
+  const groups = [...new Set(ONBOARD_TASKS.map(t=>t.day))];
+
+  return `
+  <div class="app-shell">
+    <div class="section-title-row">
+      <h2>Your SYNEX Guided Onboarding</h2>
+      <div class="backend-badge"><span class="pulse"></span> Synced with SQLite</div>
+    </div>
+
+    ${ConsultantBanner()}
+
+    <p style="color:var(--ink-soft);margin-bottom:8px;">First 30 days after partnering with SYNEX — Foundation, Strategy, and Implementation sprints.</p>
+    <div class="progress-big"><div class="fill" style="width:${pct}%"></div></div>
+    <div class="sans" style="font-size:13.5px;color:var(--ink-soft);margin-bottom:30px;">
+      <strong>${pct}% Complete</strong> (${done} of ${ONBOARD_TASKS.length} tasks finished)
+    </div>
+
+    ${groups.map(g=>`
+      <div class="day-block">
+        <div class="range">${g.split(' · ')[0]}</div>
+        <h4>${g.split(' · ')[1]}</h4>
+        <div class="panel" style="padding:10px 22px;">
+          ${ONBOARD_TASKS.filter(t=>t.day===g).map(t=>`
+            <div class="task-row ${state.onboardingTasks[t.id]?'done':''}">
+              <div class="checkbox ${state.onboardingTasks[t.id]?'checked':''}" onclick="toggleTask('${t.id}')">
+                ${state.onboardingTasks[t.id]?'✓':''}
+              </div>
+              <span onclick="toggleTask('${t.id}')" style="cursor:pointer;">${t.text}</span>
+            </div>`).join('')}
+        </div>
+      </div>`).join('')}
+
+    <div class="cta-banner">
+      <div><h3>Go to your dashboard</h3><p>Track your score, roadmap and progress in one place.</p></div>
+      <button class="btn btn-primary" onclick="nav('dashboard')">Open Client Dashboard</button>
+    </div>
+  </div>`;
+}
+
+async function toggleTask(id){
+  const nextVal = !state.onboardingTasks[id];
+  state.onboardingTasks[id] = nextVal;
+  render();
+
+  if(state.business.id){
+    await api(`/api/sync/${state.business.id}/onboarding`, 'PATCH', {
+      taskKey: id,
+      isCompleted: nextVal,
+    });
+  }
+}
+
+/* ============ DASHBOARD ============ */
+function Dashboard(){
+  const overall = state.overall ?? 67;
+  const cats = state.catScores || { foundation:72, marketing:55, digital:45, technology:68, operations:75, customer:80, strategy:70 };
+  const health = healthLabel(overall);
+  const done = Object.values(state.onboardingTasks).filter(Boolean).length;
+  const pct = Math.round((done/ONBOARD_TASKS.length)*100);
+  const bp = state.blueprint || { priorities:[{key:'digital'}, {key:'marketing'}, {key:'technology'}] };
+  const cyclePhase = state.cyclePhase || 0;
+  const plan = state.business.membership_plan || 'Professional';
+  const ana = state.analytics;
+
+  return `
+  <div class="app-shell">
+    <div class="dash-top">
+      <div>
+        <h1>Welcome, ${state.business.name || state.business.owner_name || 'Business Owner'}</h1>
+        <p>Enterprise growth partner management dashboard · Assigned Advisor: <strong>${state.consultant.name}</strong></p>
+      </div>
+      <div style="display:flex;gap:10px;">
+        <button class="btn btn-ghost btn-sm" onclick="nav('score')">View Health Check</button>
+        <button class="btn btn-primary btn-sm" onclick="nav('blueprint')">View Blueprint</button>
+      </div>
+    </div>
+
+    ${ConsultantBanner()}
+
+    <!-- KPI Row -->
+    <div class="kpi-row">
+      <div class="kpi-card">
+        <div class="lbl">Growth Score</div>
+        <div class="val" style="color:${scoreColor(overall)}">${overall}/100</div>
+        <div class="sub" style="color:${scoreColor(overall)}">${health.label}</div>
+      </div>
+      <div class="kpi-card">
+        <div class="lbl">Onboarding Progress</div>
+        <div class="val">${pct}%</div>
+        <div class="sub" style="color:var(--ink-soft)">${done} of ${ONBOARD_TASKS.length} tasks</div>
+      </div>
+      <div class="kpi-card">
+        <div class="lbl">Active Priorities</div>
+        <div class="val">${bp.priorities.length}</div>
+        <div class="sub" style="color:var(--ink-soft)">In execution</div>
+      </div>
+      <div class="kpi-card">
+        <div class="lbl">Membership Plan</div>
+        <div class="val" style="font-size:20px;color:var(--navy);">${plan}</div>
+        <div class="sub" style="color:var(--green)">✓ Continuous Partnership</div>
+      </div>
+    </div>
+
+    <!-- Deep Analytics Section -->
+    ${DeepAnalyticsSection(ana, cats)}
+
+    <!-- Dashboard Grid: Breakdown & Sprints -->
+    <div class="dash-grid" style="display:grid;grid-template-columns:1.2fr 1fr;gap:24px;">
+      <div>
+        <div class="panel">
+          <h3>Category Health Breakdown</h3>
+          ${Object.entries(cats).map(([k,v])=>`
+            <div style="margin-bottom:12px;">
+              <div style="display:flex;justify-content:space-between;font-family:'Avenir Next',sans-serif;font-size:13px;color:var(--ink-soft);margin-bottom:5px;">
+                <span>${CATEGORY_META[k]? CATEGORY_META[k].icon + ' ' + CATEGORY_META[k].label : k}</span>
+                <span style="font-weight:700;color:${scoreColor(v)}">${v}%</span>
+              </div>
+              <div class="bar-track"><div class="bar-fill" style="width:${v}%;background:${scoreColor(v)}"></div></div>
+            </div>`).join('')}
+        </div>
+        <div class="panel">
+          <h3>Top Transformation Priorities</h3>
+          ${bp.priorities.map((p,i)=>`
+            <div class="task-row">
+              <span style="font-family:'Avenir Next',sans-serif;font-weight:700;color:var(--orange-deep);">${i+1}</span>
+              <span>Improve ${CATEGORY_META[p.key]? CATEGORY_META[p.key].label : p.key}</span>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+      <div>
+        <div class="panel">
+          <h3>Monthly Growth Cycle</h3>
+          <div class="cycle-track">
+            ${['Collect','Analyze','Report','Strategy','Execute'].map((s,i)=>`
+              <div class="cs ${i===cyclePhase?'active':''}" onclick="setCycleStage(${i})">
+                <div class="dot2">${i+1}</div>
+                <span>${s}</span>
+              </div>
+            `).join('')}
+          </div>
+          <button class="btn btn-ghost btn-sm" style="margin-top:18px;width:100%;justify-content:center;" onclick="advanceCycle()">
+            Advance Cycle Stage (Stage ${cyclePhase+1}/5: ${['Collect Data','Analyze Performance','Growth Report','Strategy Meeting','Execute Improvements'][cyclePhase]})
+          </button>
+        </div>
+
+        <div class="panel">
+          <h3>30-Day Onboarding Checklist</h3>
+          ${ONBOARD_TASKS.map(t=>`
+            <div class="task-row ${state.onboardingTasks[t.id]?'done':''}">
+              <div class="checkbox ${state.onboardingTasks[t.id]?'checked':''}" onclick="toggleTask('${t.id}')">
+                ${state.onboardingTasks[t.id]?'✓':''}
+              </div>
+              <span onclick="toggleTask('${t.id}')" style="cursor:pointer;">${t.text}</span>
+            </div>`).join('')}
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+async function setCycleStage(stage){
+  state.cyclePhase = stage;
+  render();
+  if(state.business.id){
+    await api(`/api/sync/${state.business.id}/cycle`, 'PATCH', { cycleStage: stage });
+  }
+}
+
+async function advanceCycle(){
+  const nextStage = ((state.cyclePhase || 0) + 1) % 5;
+  setCycleStage(nextStage);
+}
+
+/* ============ CONSULTANT / ADMIN PORTFOLIO VIEW ============ */
+function Consultant(){
+  let clients = state.consultantClients || [];
+  if(state.consultantFilter !== 'All'){
+    clients = clients.filter(c => c.type === state.consultantFilter);
+  }
+
+  const totalClients = state.consultantClients.length;
+  const avgScore = totalClients > 0
+    ? Math.round(state.consultantClients.reduce((acc, c) => acc + (c.score || 0), 0) / totalClients)
+    : 66;
+
+  return `
+  <div class="app-shell">
+    <div class="section-title-row">
+      <div>
+        <h2>SYNEX Consultant &amp; Partner Portfolio</h2>
+        <p style="color:var(--ink-soft);margin-top:6px;">Executive oversight of all businesses under active growth management.</p>
+      </div>
+      <div style="display:flex;gap:10px;">
+        <button class="btn btn-ghost btn-sm" onclick="loadConsultantData()">↻ Refresh Data</button>
+      </div>
+    </div>
+
+    <!-- Portfolio KPI Highlights -->
+    <div class="kpi-row">
+      <div class="kpi-card">
+        <div class="lbl">Total Active Clients</div>
+        <div class="val" style="color:var(--navy-deep);">${totalClients} SMEs</div>
+        <div class="sub" style="color:var(--green)">✓ All connected to SQLite</div>
+      </div>
+      <div class="kpi-card">
+        <div class="lbl">Portfolio Avg Score</div>
+        <div class="val" style="color:${scoreColor(avgScore)}">${avgScore} / 100</div>
+        <div class="sub" style="color:${scoreColor(avgScore)}">${healthLabel(avgScore).label}</div>
+      </div>
+      <div class="kpi-card">
+        <div class="lbl">Lead Consultant</div>
+        <div class="val" style="font-size:20px;color:var(--navy);">Dr. Aris Thorne</div>
+        <div class="sub" style="color:var(--orange-deep)">Ex-McKinsey Practice Lead</div>
+      </div>
+      <div class="kpi-card">
+        <div class="lbl">Transformation Impact</div>
+        <div class="val" style="color:var(--green);">₹42.5 Lakhs</div>
+        <div class="sub" style="color:var(--ink-soft)">Annual Leakage Recovered</div>
+      </div>
+    </div>
+
+    <!-- Filter Pills -->
+    <div class="filter-pills">
+      ${['All', 'Retail Store', 'Restaurant / Cafe', 'Manufacturer', 'Service Business'].map(f=>`
+        <button class="f-pill ${state.consultantFilter===f?'active':''}" onclick="state.consultantFilter='${f}';render()">
+          ${f}
+        </button>`).join('')}
+    </div>
+
+    <!-- Client Portfolio Table -->
+    <div class="panel" style="padding:0;overflow:hidden;margin-top:16px;">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Business &amp; Owner</th>
+            <th>Industry Type</th>
+            <th>Growth Score</th>
+            <th>Health Status</th>
+            <th>Top Priority</th>
+            <th>Plan</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${clients.map(r=>`
+            <tr>
+              <td style="color:var(--ink-soft);font-size:12px;">#${r.id}</td>
+              <td>
+                <div style="font-weight:700;color:var(--navy);">${r.name}</div>
+                <div style="font-size:12px;color:var(--ink-soft);">${r.owner || '—'} · ${r.email || ''}</div>
+              </td>
+              <td>${r.type}</td>
+              <td style="font-weight:800;color:${scoreColor(r.score||0)}">
+                ${r.score != null ? r.score + ' / 100' : 'Pending'}
+              </td>
+              <td>
+                <span class="score-pill" style="background:${r.health==='Strong'?'#E4F5EC':r.health==='Good'?'#FFF3DE':'#FBE7E2'};color:${r.health==='Strong'?'var(--green)':r.health==='Good'?'var(--amber)':'var(--red)'}">
+                  ${r.health}
+                </span>
+              </td>
+              <td>${r.topPriority || 'Assessment Pending'}</td>
+              <td><span style="font-size:12px;font-weight:700;color:var(--navy);">${r.plan || 'Professional'}</span></td>
+              <td>
+                <button class="btn btn-ghost btn-sm" style="padding:5px 12px;font-size:12px;" onclick="viewClientDetail(${r.id})">
+                  View Full BI &amp; Blueprint →
+                </button>
+              </td>
+            </tr>`).join('')}
+        </tbody>
+      </table>
+    </div>
+  </div>`;
+}
+
+async function viewClientDetail(bizId){
+  await loadBusinessFullDetails(bizId);
+  nav('dashboard');
+}
+
+/* ============ MAIN RENDERER ============ */
+function render(){
+  const app = document.getElementById('app');
+  let body = '';
+  switch(state.route){
+    case 'landing': body = Landing(); break;
+    case 'login':
+    case 'register': body = AuthPage(); break;
+    case 'discovery': body = Discovery(); break;
+    case 'assessment': body = Assessment(); break;
+    case 'score': body = ScorePage(); break;
+    case 'blueprint': body = Blueprint(); break;
+    case 'onboarding': body = Onboarding(); break;
+    case 'dashboard': body = Dashboard(); break;
+    case 'consultant': body = Consultant(); break;
+    default: body = Landing();
+  }
+  app.innerHTML = `${Topbar()}<main>${body}</main>`;
+}
+
+/* Expose all handlers globally for seamless click and input events */
+window.nav = nav;
+window.setAnswer = setAnswer;
+window.prevStep = prevStep;
+window.nextStep = nextStep;
+window.setRoadmapPhase = setRoadmapPhase;
+window.toggleTask = toggleTask;
+window.advanceCycle = advanceCycle;
+window.setCycleStage = setCycleStage;
+window.loadConsultantData = loadConsultantData;
+window.viewClientDetail = viewClientDetail;
+window.quickLogin = quickLogin;
+window.handleAuthSubmit = handleAuthSubmit;
+window.logout = logout;
+window.checkDiscoveryValid = checkDiscoveryValid;
+
+// Initialize
+checkAuthSession();
+render();
+</script>
+</body>
+</html>
